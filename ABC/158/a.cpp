@@ -38,41 +38,18 @@ typedef long long ll;
 #define S second
 
 int main(int argc, char const *argv[]) {
-  //　入力
-  // s
-  // q
-  // query=(1, 2) if query == 2 top_or_bottom str
+  std::string str;
+  bool flag = true;
+  std::cin >> str;
 
-  std::string first;
-  ll q;
-  int query, top_or_bottom;
-  std::string s, ans, temp;
-  bool is_reverse = false;
-  std::vector<std::string> top, bottom;
-
-  std::cin >> first;
-  std::cin >> q;
-
-  REP(i,q) {
-    std::cin >> query;
-    if (query == 1) is_reverse = (is_reverse)?false:true;
-    else {
-      std::cin >> top_or_bottom >> s;
-      if (top_or_bottom == 1) {
-        if (!is_reverse) top.PB(s);
-        else bottom.PB(s);
-      } else {
-        if (!is_reverse) bottom.PB(s);
-        else top.PB(s);
-      }
-    }
+  if (str == "AAA" || str == "BBB") {
+    flag = false;
   }
-  REPD(i,top.size()) temp += top[i];
-  temp += first;
-  REP(i,bottom.size()) temp += bottom[i];
 
-  if (is_reverse) REPD(i, (int)(temp.length())) ans += temp[i];
-  else REP(i,(int)(temp.length())) ans += temp[i];
-  std::cout << ans << '\n';
+  if (flag) {
+    std::cout << "Yes" << '\n';
+  } else {
+    std::cout << "No" << '\n';
+  }
   return 0;
 }

@@ -37,42 +37,37 @@ typedef long long ll;
 #define F first
 #define S second
 
+float float_max(float a, float b) {
+  return (a>b)?a:b;
+}
+
+float float_min(float a, float b) {
+  return (a < b) ? a:b;
+}
+
 int main(int argc, char const *argv[]) {
-  //　入力
-  // s
-  // q
-  // query=(1, 2) if query == 2 top_or_bottom str
+  float a, b;
+  ll _min, _max;
+  float min_a, min_b, max_a, max_b;
+  float max_, min_;
+  std::cin >> a >> b;
 
-  std::string first;
-  ll q;
-  int query, top_or_bottom;
-  std::string s, ans, temp;
-  bool is_reverse = false;
-  std::vector<std::string> top, bottom;
+  min_a = (25./2.) * float(a);
+  max_a = (25./2.) * float(a + 1);
 
-  std::cin >> first;
-  std::cin >> q;
+  min_b = 10. * float(b);
+  max_b = 10. * float(b + 1);
 
-  REP(i,q) {
-    std::cin >> query;
-    if (query == 1) is_reverse = (is_reverse)?false:true;
-    else {
-      std::cin >> top_or_bottom >> s;
-      if (top_or_bottom == 1) {
-        if (!is_reverse) top.PB(s);
-        else bottom.PB(s);
-      } else {
-        if (!is_reverse) bottom.PB(s);
-        else top.PB(s);
-      }
-    }
+  max_ = float_min(max_a, max_b);
+  min_ = float_max(min_a, min_b);
+
+  _min = int(min_ + 0.5);
+  _max = int(max_);
+
+  if (_min >= _max) {
+    std::cout << "-1" << '\n';
+  } else {
+    std::cout << _min << '\n';
   }
-  REPD(i,top.size()) temp += top[i];
-  temp += first;
-  REP(i,bottom.size()) temp += bottom[i];
-
-  if (is_reverse) REPD(i, (int)(temp.length())) ans += temp[i];
-  else REP(i,(int)(temp.length())) ans += temp[i];
-  std::cout << ans << '\n';
   return 0;
 }

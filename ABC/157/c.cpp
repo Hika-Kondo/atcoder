@@ -37,42 +37,33 @@ typedef long long ll;
 #define F first
 #define S second
 
+
 int main(int argc, char const *argv[]) {
-  //　入力
-  // s
-  // q
-  // query=(1, 2) if query == 2 top_or_bottom str
+  int n,m,max,min;
+  ll ans = INF;
+  int s[10], c[10];
+  bool flag = false;
 
-  std::string first;
-  ll q;
-  int query, top_or_bottom;
-  std::string s, ans, temp;
-  bool is_reverse = false;
-  std::vector<std::string> top, bottom;
+  std::string number;
 
-  std::cin >> first;
-  std::cin >> q;
+  std::cin >> n >> m;
+  REP(i, m) std::cin >> s[i] >> c[i];
 
-  REP(i,q) {
-    std::cin >> query;
-    if (query == 1) is_reverse = (is_reverse)?false:true;
-    else {
-      std::cin >> top_or_bottom >> s;
-      if (top_or_bottom == 1) {
-        if (!is_reverse) top.PB(s);
-        else bottom.PB(s);
-      } else {
-        if (!is_reverse) bottom.PB(s);
-        else top.PB(s);
+  max = pow(10,n);
+  if (n == 1) min = 0;
+  else min = pow(10,n-1);
+  FOR(i,min, max-1) {
+    number = std::to_string(i);
+    flag = true;
+    REP(j, m) {
+      if (int(number[s[j]-1]-'0') != c[j]) {
+        flag=false;
       }
+      //std::cout << flag << '\n';
     }
+    if (flag) ans = std::min(ans,i);
   }
-  REPD(i,top.size()) temp += top[i];
-  temp += first;
-  REP(i,bottom.size()) temp += bottom[i];
-
-  if (is_reverse) REPD(i, (int)(temp.length())) ans += temp[i];
-  else REP(i,(int)(temp.length())) ans += temp[i];
-  std::cout << ans << '\n';
+  if (ans == INF) std::cout << "-1" << '\n';
+  else std::cout << ans << '\n';
   return 0;
 }

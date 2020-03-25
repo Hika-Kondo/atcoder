@@ -37,42 +37,32 @@ typedef long long ll;
 #define F first
 #define S second
 
+
 int main(int argc, char const *argv[]) {
-  //　入力
-  // s
-  // q
-  // query=(1, 2) if query == 2 top_or_bottom str
+  int a[3][3], index[3][3]={{0},{0},{0}};
+  int n, b;
+  bool flag = false;
 
-  std::string first;
-  ll q;
-  int query, top_or_bottom;
-  std::string s, ans, temp;
-  bool is_reverse = false;
-  std::vector<std::string> top, bottom;
+  REP(i,3) std::cin >> a[i][0] >> a[i][1] >> a[i][2];
+  std::cin >> n;
 
-  std::cin >> first;
-  std::cin >> q;
-
-  REP(i,q) {
-    std::cin >> query;
-    if (query == 1) is_reverse = (is_reverse)?false:true;
-    else {
-      std::cin >> top_or_bottom >> s;
-      if (top_or_bottom == 1) {
-        if (!is_reverse) top.PB(s);
-        else bottom.PB(s);
-      } else {
-        if (!is_reverse) bottom.PB(s);
-        else top.PB(s);
+  REP(i, n) {
+    std::cin >> b;
+    REP(j, 3) {
+      REP(k, 3) {
+        if (a[j][k] == b) {
+          index[j][k] = 1;
+        }
       }
     }
   }
-  REPD(i,top.size()) temp += top[i];
-  temp += first;
-  REP(i,bottom.size()) temp += bottom[i];
-
-  if (is_reverse) REPD(i, (int)(temp.length())) ans += temp[i];
-  else REP(i,(int)(temp.length())) ans += temp[i];
-  std::cout << ans << '\n';
+  REP(i, 3) {
+    if (index[i][0] == 1 && index[i][1] == 1 && index[i][2] == 1) flag=true;
+    if (index[0][i] == 1 && index[1][i] == 1 && index[2][i] == 1) flag=true;
+    if (index[0][0] == 1 && index[1][1] == 1 && index[2][2] == 1) flag=true;
+    if (index[2][0] == 1 && index[1][1] == 1 && index[0][2] == 1) flag=true;
+  }
+  if (flag) std::cout << "Yes" << '\n';
+  else std::cout << "No" << '\n';
   return 0;
 }
