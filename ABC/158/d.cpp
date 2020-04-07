@@ -37,42 +37,62 @@ typedef long long ll;
 #define F first
 #define S second
 
+
+struct UnionFind {
+  // 根はそのUnionの大きさの絶対値で負の値を持つ.
+  // 葉はそれぞれ根のインデックスを持つ.
+  std::vector<int> d;
+  UnionFind(int n): d(n, -1) {}
+  // 根を探す
+  int find(int x) {
+    if (d[x] < 0) return x;
+    return d[x] = find(d[x]);
+  }
+  bool unite(int x, int y) {
+    // xとyを合体させる
+    x = find(x); y = find(y);
+    if (x == y) return false;
+    if (d[x] > d[y]) swap(x,y);
+    d[x] += d[y];
+    d[y] = x;
+    return true;
+  }
+  bool same(int x, int y) { return find(x) == find(y);}
+  int size(int x) {return -d[find[x]];}
+};
+
 int main(int argc, char const *argv[]) {
   //　入力
   // s
   // q
   // query=(1, 2) if query == 2 top_or_bottom str
+  int deg[INF];
+  std::vector<int> to[INF];
+  int n, m, k;
+  std::cin >> n >> m >> k;
 
-  std::string first;
-  ll q;
-  int query, top_or_bottom;
-  std::string s, ans, temp;
-  bool is_reverse = false;
-  std::vector<std::string> top, bottom;
+  UnionFind nf(n);
 
-  std::cin >> first;
-  std::cin >> q;
-
-  REP(i,q) {
-    std::cin >> query;
-    if (query == 1) is_reverse = (is_reverse)?false:true;
-    else {
-      std::cin >> top_or_bottom >> s;
-      if (top_or_bottom == 1) {
-        if (!is_reverse) top.PB(s);
-        else bottom.PB(s);
-      } else {
-        if (!is_reverse) bottom.PB(s);
-        else top.PB(s);
-      }
-    }
+  REP(i,m) {
+    int a, b;
+    std::cin >> a >> b;
+    deg[a]++;
+    deg[b]++;
+    uf.unite(a,b);
   }
-  REPD(i,top.size()) temp += top[i];
-  temp += first;
-  REP(i,bottom.size()) temp += bottom[i];
-
-  if (is_reverse) REPD(i, (int)(temp.length())) ans += temp[i];
-  else REP(i,(int)(temp.length())) ans += temp[i];
-  std::cout << ans << '\n';
+  REP(i,k) {
+    int a, b;
+    std::cin >> a >> b;
+    --a; --b;
+    to[a].push_back(b);
+    to[b].push_back(a);
+  }
+  REP(i,n) {
+    int ans = uf.size(i) - 1 - deg[i];
+    for (int u : to[i]) {
+      if (uf.same(i,u)) --ans;
+    }
+    printf("%d%c", ans, i==n-1?'\n':' ');
+  }
   return 0;
 }
