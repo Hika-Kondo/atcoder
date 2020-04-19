@@ -32,7 +32,7 @@ typedef long long ll;
 #define MAX(x) *max_element(ALL(x))
 #define INF 1000000000000
 #define NCK_MAX 510000
-#define MOD 1e9+7
+#define MOD 1000000007
 #define PB push_back
 #define MP make_pair
 #define F first
@@ -47,32 +47,40 @@ ll myPow(ll x, ll n, ll m){
     return x * myPow(x, n - 1, m) % m;
 }
 
-ll inv(int64_t a){
-    return myPow(a, MOD-2, MOD);
+
+ll fac[NCK_MAX], finv[NCK_MAX], inv[NCK_MAX], facn[NCK_MAX];
+
+// テーブルを作る前処理
+void COMinit(ll n) {
+    fac[0] = fac[1] = 1;
+    facn[1] = n;
+    finv[0] = finv[1] = 1;
+    inv[1] = 1;
+    for (int i = 2; i < NCK_MAX; i++){
+        fac[i] = fac[i - 1] * i % MOD;
+        facn[i] = facn[i-1] * (n-i+1) % MOD;
+        inv[i] = MOD - inv[MOD%i] * (MOD / i) % MOD;
+        finv[i] = finv[i - 1] * inv[i] % MOD;
+    }
+}
+ll modinv(ll a, ll mod){
+  return myPow(a, mod - 2, mod);
 }
 
-ll ncr(int n, int r) {
-  ll denominator = 1;
-  ll molecule = 1;
-  REP(i,r) {
-    denominator *= (r-i) % MOD;
-    molecule *= (n-i) % MOD;
-  }
-  return denominator * inv(molecule) % MOD;
+// 二項係数計算
+long long COM(int n, int k){
+    if (n < k) return 0;
+    if (n < 0 || k < 0) return 0;
+    return facn[k] * finv[k] % MOD;
 }
 
 int main(int argc, char const *argv[]) {
-  // std::cout << "here" << '\n';
-  ll n, a, b;
-  ll ans;
+  ll n, a, b, ans;
   std::cin >> n >> a >> b;
-
-  ans = (myPow(2,n,MOD)-1+MOD)%MOD;
+  COMinit(n);
+  ans = (myPow(2,n,MOD)-1 + MOD) %MOD;
+  ans = (ans - COM(n,a)+MOD)%MOD;
+  ans = (ans -COM(n,b)+MOD)%MOD;
   std::cout << ans << '\n';
-  ans = (ans - ncr(n,a)+MOD)%MOD;
-  std::cout << ans << '\n';
-  ans = (ans - ncr(n,b)+MOD)%MOD;
-  std::cout << ans << '\n';
-
   return 0;
 }
