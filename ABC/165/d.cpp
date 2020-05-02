@@ -19,7 +19,14 @@ typedef pair<int,int> P;
 #define F first
 #define S second
 
-int main(int argc, char const *argv[]) {
+ll solove(ll a, ll b, ll x){
+    ll res = int((a*x)/b) - a* int(x/b);
+    return res;
+}
 
+int main(int argc, char const *argv[]) {
+    ll a,b,n; std::cin >> a >> b >> n;
+    ll ans = solove(a,b,min(b-1,n));
+    std::cout << ans << "\n";
     return 0;
 }

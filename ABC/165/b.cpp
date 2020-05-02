@@ -20,6 +20,18 @@ typedef pair<int,int> P;
 #define S second
 
 int main(int argc, char const *argv[]) {
-
+    ll x; std::cin >> x;
+    float shoki = 100;
+    ll counter = 0;
+    while (true)
+    {
+        shoki *= 1.01;
+        shoki = float(int(shoki));
+        counter++;
+        if (shoki >= float(x)) {
+            std::cout << counter << "\n";
+            break;
+        }
+    }
     return 0;
 }

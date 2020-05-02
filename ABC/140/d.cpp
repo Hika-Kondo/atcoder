@@ -20,6 +20,9 @@ typedef pair<int,int> P;
 #define S second
 
 int main(int argc, char const *argv[]) {
-
+    int n,k; std::cin >> n >> k;
+    std::string s; std::cin >> s;
+    int counter = 0; REP(i,n-1) if (s[i] ==  s[i+1]) counter++;
+    std::cout << min(n-1,counter+2*k) << "\n";
     return 0;
 }

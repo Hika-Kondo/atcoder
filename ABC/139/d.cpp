@@ -19,7 +19,17 @@ typedef pair<int,int> P;
 #define F first
 #define S second
 
+ll sum(ll n) {
+    return n*(n+1)/2;
+}
+
 int main(int argc, char const *argv[]) {
+    ll n; std::cin >> n;
+    if (n == 0) {
+        std::cout << 0 << "\n";
+        return 0;
+    }
+    std::cout << sum(n-1) << "\n";
 
     return 0;
 }

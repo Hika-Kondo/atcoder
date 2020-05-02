@@ -20,6 +20,12 @@ typedef pair<int,int> P;
 #define S second
 
 int main(int argc, char const *argv[]) {
-
+    int k,a,b; std::cin >> k >> a >> b;
+    bool flag = false;
+    FOR(i, min(a,b), max(a,b)) {
+        if (i % k == 0) flag = true;
+    }
+    if (flag) std::cout << "OK" << "\n";
+    else std::cout << "NG" << "\n";
     return 0;
 }
