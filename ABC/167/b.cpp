@@ -20,6 +20,14 @@ typedef pair<int,int> P;
 #define S second
 
 int main(int argc, char const *argv[]) {
-    
+    ll a,b,c,k; cin >> a >> b >> c >> k;
+    if (a >= k) {
+        cout << k << "\n";
+    } else if (a + b >= k) {
+        cout << a << "\n";
+    } else {
+        cout << 2 * a + b - k << "\n";
+    }
+
     return 0;
 }

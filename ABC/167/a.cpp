@@ -20,6 +20,12 @@ typedef pair<int,int> P;
 #define S second
 
 int main(int argc, char const *argv[]) {
-    
+    string s,t; cin >> s >> t;
+    bool flag = true;
+    REP(i,SIZE(s)) {
+        if (s[i] != t[i]) flag = false;
+    }
+    if (flag) cout << "Yes" << "\n";
+    else cout << "No" << "\n";
     return 0;
 }
