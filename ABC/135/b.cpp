@@ -20,19 +20,19 @@ typedef pair<int,int> P;
 #define S second
 
 int main(int argc, char const *argv[]) {
-    ll l, r;
-    cin >> l >> r;
-    int ans = 30000;
-    FOR(i,l,r-1) FOR(j,i+1,r) 
-    {
-        int tmp = (i * j) % 2019;
-        if (tmp == 0) {
-            cout << 0 << endl;
-            return 0;
-        }
-        if (ans > tmp) 
-            ans = tmp;
+    int n; cin >> n;
+    vector<int> p(n),sorted(n); REP(i,n) cin >> p[i];
+    sorted = p;
+    sort(ALL(sorted));
+    ll counter = 0;
+    REP(i, n) {
+        if (p[i] == sorted[i]) continue;
+        else counter++;
     }
-    cout << ans << endl;
+    if (counter==0 or counter ==2 ) {
+        cout << "YES" << "\n";
+    } else {
+        cout << "NO" << "\n";
+    }
     return 0;
 }

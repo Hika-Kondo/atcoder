@@ -20,19 +20,24 @@ typedef pair<int,int> P;
 #define S second
 
 int main(int argc, char const *argv[]) {
-    ll l, r;
-    cin >> l >> r;
-    int ans = 30000;
-    FOR(i,l,r-1) FOR(j,i+1,r) 
+    string s;
+    cin >> s;
+
+    reverse(ALL(s));
+
+    vector<int> amari(2019,0);
+    int now = 0, x = 1;
+    ll ans = 0;
+    amari[0]++;
+    REP(i,SIZE(s))
     {
-        int tmp = (i * j) % 2019;
-        if (tmp == 0) {
-            cout << 0 << endl;
-            return 0;
-        }
-        if (ans > tmp) 
-            ans = tmp;
+        int tmp = s[i] - '0';
+        now = (now + tmp * x) % 2019;
+        ans += amari[now];
+        amari[now]++;
+        x = 10*x%2019;
     }
+
     cout << ans << endl;
     return 0;
 }

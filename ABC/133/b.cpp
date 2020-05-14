@@ -20,18 +20,29 @@ typedef pair<int,int> P;
 #define S second
 
 int main(int argc, char const *argv[]) {
-    ll l, r;
-    cin >> l >> r;
-    int ans = 30000;
-    FOR(i,l,r-1) FOR(j,i+1,r) 
+    int n, d;
+    cin >> n >> d;
+    float x[n][d];
+
+    REP(i, n)
+    REP(j, d)
+    cin >> x[i][j];
+
+    int ans = 0;
+    float dis;
+
+    REP(i, n - 1)
     {
-        int tmp = (i * j) % 2019;
-        if (tmp == 0) {
-            cout << 0 << endl;
-            return 0;
+        FOR(j, i+1, n-1)
+        {
+            float tmp = 0;
+            REP(k, d)
+            {
+                tmp += pow(x[i][k]-x[j][k], 2);
+            }
+            if (sqrt(tmp) == float(int(sqrt(tmp))))
+                ans++;
         }
-        if (ans > tmp) 
-            ans = tmp;
     }
     cout << ans << endl;
     return 0;

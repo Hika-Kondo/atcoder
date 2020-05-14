@@ -20,19 +20,9 @@ typedef pair<int,int> P;
 #define S second
 
 int main(int argc, char const *argv[]) {
-    ll l, r;
-    cin >> l >> r;
-    int ans = 30000;
-    FOR(i,l,r-1) FOR(j,i+1,r) 
-    {
-        int tmp = (i * j) % 2019;
-        if (tmp == 0) {
-            cout << 0 << endl;
-            return 0;
-        }
-        if (ans > tmp) 
-            ans = tmp;
-    }
+    int r;
+    cin >> r;
+    ll ans = pow(r,2) * 3;
     cout << ans << endl;
     return 0;
 }

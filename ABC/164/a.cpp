@@ -20,19 +20,12 @@ typedef pair<int,int> P;
 #define S second
 
 int main(int argc, char const *argv[]) {
-    ll l, r;
-    cin >> l >> r;
-    int ans = 30000;
-    FOR(i,l,r-1) FOR(j,i+1,r) 
-    {
-        int tmp = (i * j) % 2019;
-        if (tmp == 0) {
-            cout << 0 << endl;
-            return 0;
-        }
-        if (ans > tmp) 
-            ans = tmp;
-    }
-    cout << ans << endl;
+    int s, w;
+    cin >> s >> w;
+    if (s > w) 
+        cout << "safe"
+             << "\n";
+    else
+        cout << "unsafe" << "\n";
     return 0;
 }

@@ -20,19 +20,18 @@ typedef pair<int,int> P;
 #define S second
 
 int main(int argc, char const *argv[]) {
-    ll l, r;
-    cin >> l >> r;
-    int ans = 30000;
-    FOR(i,l,r-1) FOR(j,i+1,r) 
+    int a, b, c, d; // a 高橋くんの体力 b 高橋くんの攻撃力 c 青木くんの体力 d 青木くんの攻撃力
+    cin >> a >> b >> c >> d;
+    while (a > 0 && c > 0)
     {
-        int tmp = (i * j) % 2019;
-        if (tmp == 0) {
-            cout << 0 << endl;
-            return 0;
-        }
-        if (ans > tmp) 
-            ans = tmp;
+        c -= b;
+        if (c <= 0)
+            break;
+        a -= d; 
     }
-    cout << ans << endl;
+    if (a <= 0)
+        cout << "No" << "\n";
+    else
+        cout << "Yes" << "\n";
     return 0;
 }
