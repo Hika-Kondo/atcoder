@@ -20,18 +20,22 @@ typedef pair<int,int> P;
 #define S second
 
 int main(int argc, char const *argv[]) {
-    int n;
-    cin >> n;
-
-    vector<int> d(n);
-    REP(i,n)
-        cin >> d[i];
+    string s;
+    cin >> s;
+    map<char, int > counter;
+    REP(i,4)
+        counter[s[i]]++;
     
-    sort(ALL(d));
-
-    int mid = n/2;
-    int ans = d.at(mid) - d.at(mid-1);
-    cout << ans << endl;
-
+    if (SIZE(counter) != 2)
+    {
+        cout << "No" << endl;
+        return 0;
+    }
+    if (counter.at(s[0]) != 2)
+    {
+        cout << "No" << endl;
+        return 0;
+    }
+    cout << "Yes" << endl;
     return 0;
 }

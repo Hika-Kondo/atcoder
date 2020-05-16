@@ -19,12 +19,49 @@ typedef pair<int, int> P;
 #define F first
 #define S second
 
-const int D = 60;
-const int MAX_N 200005;
-ll to[D][MAX_N];
 
 int main(int argc, char const *argv[])
 {
-    ll n,k; cin >>
+    ll n,k; cin >> n >> k;
+    int dp[n][61] = {{-1}},a[n];
+    REP(i,n)
+        cin >> a[i];
+
+
+    REP(i,n)
+        dp[a[i]-1][0] = i;
+
+    int log2 = log(k) / log(2);
+
+    FOR(j,1,60)
+    {   
+        REP(i,n)
+            if (dp[i][j-1] != -1)
+                dp[i][j] = dp[dp[i][j-1]][j-1];
+    }
+
+    int ans[n];
+    REP(i,n)
+        ans[i] = i;
+    REP(i, log2+1)
+    {
+        if (k & (ll(1 << i)))
+        {   
+            int tmp[n];
+            REP(j,n)
+                tmp[j] = ans[dp[j][i]];
+            REP(j,n)
+                ans[j] = tmp[j];
+        }
+    }
+    REP(i,n)
+        cout << ans[i] << " ";
+    cout << endl;
+    REP(i,n)
+    {
+        if (ans[i] == 0)
+            cout << i+1 << endl;
+    }
+    
     return 0;
 }

@@ -20,18 +20,16 @@ typedef pair<int,int> P;
 #define S second
 
 int main(int argc, char const *argv[]) {
-    int n;
-    cin >> n;
-
-    vector<int> d(n);
-    REP(i,n)
-        cin >> d[i];
-    
-    sort(ALL(d));
-
-    int mid = n/2;
-    int ans = d.at(mid) - d.at(mid-1);
-    cout << ans << endl;
-
+    string s;
+    cin >> s;
+    FOR(i,1,SIZE(s)-1)
+    {
+        if (s[i] == s[i-1])
+        {
+            cout << "Bad" << endl;
+            return 0;
+        }
+    }
+    cout << "Good" << endl;
     return 0;
 }

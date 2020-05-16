@@ -22,16 +22,37 @@ typedef pair<int,int> P;
 int main(int argc, char const *argv[]) {
     int n;
     cin >> n;
-
-    vector<int> d(n);
-    REP(i,n)
-        cin >> d[i];
     
-    sort(ALL(d));
+    map<int,priority_queue<int>> ma;
+    priority_queue<int, vector<int>, greater<int>> q;
+    
+    REP(i,n)
+    {
+        int a, b;
+        cin >> a >> b;
+        q.push(b);
+        ma[b].push(a);
+    }
 
-    int mid = n/2;
-    int ans = d.at(mid) - d.at(mid-1);
-    cout << ans << endl;
+    int now = 0,top;
+
+    while(!q.empty())
+    {
+        top = q.top();
+        q.pop();
+        while (!ma[top].empty())
+        {
+            now+=ma[top].top();
+            ma[top].pop();
+            if (now > top)
+            {
+                cout << "No" << endl;
+                return 0;
+            }
+        }
+    }
+
+    cout << "Yes" << endl;
 
     return 0;
 }

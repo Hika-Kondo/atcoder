@@ -20,18 +20,27 @@ typedef pair<int,int> P;
 #define S second
 
 int main(int argc, char const *argv[]) {
-    int n;
-    cin >> n;
-
-    vector<int> d(n);
+    int n,l;
+    cin >> n >> l;
+    int aji[n];
+    int eat,ans=0;
+    int sum = 0;
     REP(i,n)
-        cin >> d[i];
+    {
+        aji[i] = l + i;
+        sum += aji[i];
+    }
     
-    sort(ALL(d));
-
-    int mid = n/2;
-    int ans = d.at(mid) - d.at(mid-1);
+    REP(i,n)
+    {
+        int tmp = 0;
+        REP(j,n)
+        {
+            if (i == j) continue;
+            tmp+=aji[j];
+        }
+        if (abs(sum - tmp) < abs(sum - ans)) ans = tmp;
+    }
     cout << ans << endl;
-
     return 0;
 }

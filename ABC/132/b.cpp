@@ -22,16 +22,21 @@ typedef pair<int,int> P;
 int main(int argc, char const *argv[]) {
     int n;
     cin >> n;
-
-    vector<int> d(n);
+    int p[n];
     REP(i,n)
-        cin >> d[i];
-    
-    sort(ALL(d));
+        cin >> p[i];
 
-    int mid = n/2;
-    int ans = d.at(mid) - d.at(mid-1);
+    int ans = 0;
+
+    FOR(i,1,n-2)
+    {
+        int maxitm = max({p[i-1],p[i],p[i+1]});
+        int minitm = min({p[i-1],p[i],p[i+1]});
+        if (p[i] != maxitm && p[i] != minitm)
+        {
+            ans++;        
+        }
+    }
     cout << ans << endl;
-
-    return 0;
+    return 0;   
 }
