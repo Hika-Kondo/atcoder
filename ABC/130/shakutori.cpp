@@ -19,33 +19,42 @@ typedef pair<int, int> P;
 #define F first
 #define S second
 
-
 int main(int argc, char const *argv[])
 {
-    ll n,k;
+    ll n, k;
     cin >> n >> k;
-    int dp[61][n];
-    REP(i,n)
+    vector<ll> a(n);
+    REP(i, n)
     {
-        cin >> dp[0][i];
-        dp[0][i]--;
-    }
-    
-    REP(i,60) REP(j,n)
-    {
-        dp[i+1][j] = dp[i][dp[i][j]];
+        cin >> a[i];
     }
 
-    int v = 0;
-    REPD(i,60)
-    {
-        ll l = 1ll<<i;
-        if (l <= k)
+    ll right = 0;
+    ll sum = 0, tot = 0;
+
+    // 条件を満たさないやつを求めて引く
+    REP(left, n)
+    {   
+        // breakした時にrightは含まれないつまり条件を満たす区間は(right-1) - left + 1 = right - left
+        // [left,right) rightは含まないようにする.
+        while (right < n && sum + a[right] < k)
         {
-            v = dp[i][v];
-            k -= l;
+            sum += a[right];
+            right++;
+        }
+
+        if (right == left)
+        {
+            right++;
+        }
+        else 
+        {
+            tot += right - left;
+            sum -= a[left];
         }
     }
-    cout << v + 1 << endl;
+
+    ll ans = n * (n + 1) / 2 - tot;
+    cout << ans << endl;
     return 0;
 }

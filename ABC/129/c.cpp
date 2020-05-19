@@ -13,39 +13,42 @@ typedef pair<int, int> P;
 #define SIZE(x) ((ll)(x).size())      //sizeをsize_tからllに直しておく
 #define MAX(x) *max_element(ALL(x))
 #define INF 1000000000000 //10^12
-#define MOD 10000007      //10^9+7
+#define MOD (ll)1e9+7      //10^9+7
 #define PB push_back
 #define MP make_pair
 #define F first
 #define S second
 
-
 int main(int argc, char const *argv[])
 {
-    ll n,k;
-    cin >> n >> k;
-    int dp[61][n];
-    REP(i,n)
+    int n,m;
+    cin >> n >> m;
+    vector<int> a(n);
+    ll dp[2][n+2];
+    dp[0][0] = 1;
+    dp[1][0] = 0;
+    dp[0][1] = 1;
+    dp[1][1] = 0;
+    REP(i,m)
     {
-        cin >> dp[0][i];
-        dp[0][i]--;
+        cin >> a[i];
+        dp[0][a[i]] = INF * -1;
+        dp[1][a[i]] = INF * -1;
     }
     
-    REP(i,60) REP(j,n)
-    {
-        dp[i+1][j] = dp[i][dp[i][j]];
+
+    FOR(i,2,n)
+    {   
+        if (dp[0][i] == INF * -1) continue;
+        dp[0][i] = (max(dp[0][i-1],(ll)0) + max(dp[1][i-1],(ll)0));
+        dp[1][i] = (max(dp[0][i-2],(ll)0) + max(dp[1][i-2],(ll)0));
+        dp[0][i] %= MOD;
+        dp[1][i] %= MOD;
+        
     }
 
-    int v = 0;
-    REPD(i,60)
-    {
-        ll l = 1ll<<i;
-        if (l <= k)
-        {
-            v = dp[i][v];
-            k -= l;
-        }
-    }
-    cout << v + 1 << endl;
+    ll ans = dp[0][n] + dp[1][n];
+    ans %= MOD;
+    cout << ans << endl;
     return 0;
 }

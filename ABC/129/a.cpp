@@ -19,33 +19,11 @@ typedef pair<int, int> P;
 #define F first
 #define S second
 
-
 int main(int argc, char const *argv[])
 {
-    ll n,k;
-    cin >> n >> k;
-    int dp[61][n];
-    REP(i,n)
-    {
-        cin >> dp[0][i];
-        dp[0][i]--;
-    }
-    
-    REP(i,60) REP(j,n)
-    {
-        dp[i+1][j] = dp[i][dp[i][j]];
-    }
-
-    int v = 0;
-    REPD(i,60)
-    {
-        ll l = 1ll<<i;
-        if (l <= k)
-        {
-            v = dp[i][v];
-            k -= l;
-        }
-    }
-    cout << v + 1 << endl;
+    int p,q,r;
+    cin >> p >> q >> r;
+    int ans = min({p + q, q + r, r + p});
+    cout << ans << endl;
     return 0;
 }

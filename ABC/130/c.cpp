@@ -20,8 +20,15 @@ typedef pair<int,int> P;
 #define S second
 
 int main(int argc, char const *argv[]) {
-    int n;
-    cin >> n;
-    
+    double w,h,x,y;
+    // cin >> w >> h >> x >> y;
+    scanf("%lf%lf%lf%lf",&w,&h,&x,&y);
+    double area = w * h;
+    double ans = area / 2;
+    printf("%.10f",ans);
+    if (w/2 == x && h / 2 == y)
+        printf(" 1\n");
+    else 
+        printf(" 0\n");
     return 0;
 }

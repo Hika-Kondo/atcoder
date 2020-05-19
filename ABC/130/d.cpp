@@ -20,8 +20,35 @@ typedef pair<int,int> P;
 #define S second
 
 int main(int argc, char const *argv[]) {
-    int n;
-    cin >> n;
-    
+    ll n,k;
+    cin >> n >> k;
+
+    vector<ll> sum(n);
+    sum[0] = 0;
+    cin >> sum[0];
+    REP(i,n-1)
+    {
+        ll tmp;
+        cin >> tmp;
+        sum[i+1] = sum[i] + tmp;
+    }
+
+    ll tot = 0;
+
+    REP(i,n)
+    {
+        ll now = sum[i];
+        ll sa = now - k;
+
+        auto low = upper_bound(sum.begin(),sum.end(),sa);
+        ll idx = low - sum.begin();
+        if (idx == 0 && sum[i] >= k)
+            tot++;
+        else if (idx != 0 && sum[i] - sum[idx-1] >= k)
+            tot+= idx + 1;
+        else if (sum[i] >= k && idx != 0)
+            tot += idx;
+    }
+    cout << tot << endl;
     return 0;
 }

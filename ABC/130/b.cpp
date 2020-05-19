@@ -19,9 +19,32 @@ typedef pair<int,int> P;
 #define F first
 #define S second
 
+int ans[1000010]={-1};
+int l[1000100] = {-1};
+
+void solve(int n) 
+{
+    ans[0] = 0;
+    REP(i,n)
+    {
+        ans[i+1] = ans[i] + l[i];  
+    }
+}
+
 int main(int argc, char const *argv[]) {
-    int n;
-    cin >> n;
+    int n,x;
+    cin >> n >> x; 
+    REP(i,n)
+        cin >> l[i];
     
+    int tot = 0;
+    solve(n);
+    REP(i,n+1) 
+    {
+        if (ans[i] <= x)
+            tot++;
+    }
+
+    cout << tot << endl;
     return 0;
 }
