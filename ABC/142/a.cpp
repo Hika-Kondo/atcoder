@@ -20,6 +20,16 @@ typedef pair<int,int> P;
 #define S second
 
 int main(int argc, char const *argv[]) {
-
+  int n;
+  scanf("%d",&n);
+  if (n == 1)
+    cout << "1.0000000000000" << endl;
+  else if (n % 2 == 0)
+    cout << "0.500000000000000000" << endl;
+  else
+  {
+    float ans = (float) (n/2 + 1) / n;
+    printf("%0.10f\n",ans);
+  }
   return 0;
 }

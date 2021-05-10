@@ -20,6 +20,12 @@ typedef pair<int,int> P;
 #define S second
 
 int main(int argc, char const *argv[]) {
-
+  int n,k; cin >> n >> k;
+  vector<int> a(n); REP(i,n) cin >> a[i];
+  int ans = 0;
+  REP(i,n) {
+    if (a[i] >= k) ans++; 
+  }
+  cout << ans << endl;
   return 0;
 }

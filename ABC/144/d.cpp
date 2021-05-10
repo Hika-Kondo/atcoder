@@ -17,13 +17,20 @@ typedef long long ll;
 #define PB push_back
 #define MP make_pair
 #define F first
-#define S secon
+#define S second
+
 
 int main(int argc, char const *argv[]) {
-  int a, b, x; std::cin >> a >> b >> x;
-  float y;
-  y = (float)(2 * x / pow(a,2)) - float(b);
-  float ans = 90 - atan(floadfghffjawiefjaowft(b-y/a));
-  std::cout << ans << '\n';
+  double a, b, x; cin >> a >> b >> x;
+  bool flag = (a * a * b / 2 < x);
+  double rad;
+  if (flag) {
+    double diff = a * a * b - x;
+    rad = atan2(2 * diff/pow(a,2),a);
+  } else {
+    rad = atan2(b,2 * x / (a * b));
+  }
+  double ans = rad/ (2 * acos(-1)) * 360;
+  printf("%.10f\n",ans);
   return 0;
 }
